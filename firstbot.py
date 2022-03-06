@@ -64,6 +64,26 @@ async def on_message(message):
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
 
+    if '!addrole' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561':
+            await message.channel.send("Confirm?")
+            user = message.author
+            role = discord.utils.get(user.guild.roles, name="Mapcore")
+            await user.add_roles(role)
+        else:
+            await message.channel.send("Permission denied.")
+
+    if '!role' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561':
+            confirm = await message.channel.send("Confirm?")
+            print(confirm)
+            await confirm.add_reaction('👍')
+        else:
+            await message.channel.send("Permission denied.")
+
+
 #jones speak
 #@client.event
 #async def on_message(message):
