@@ -27,12 +27,14 @@ def get_quote():
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
-#class MyClient(discord.Client):
-#    async def on_ready(self):
-#        print('Logged on as {0}!'.format(self.user))
-#    async def on_message(self, message):
-#        print('Message from {0.author}: {0.content}'.format(message))
-#client = MyClient()
+"""
+class MyClient(discord.Client):
+    async def on_ready(self):
+        print('Logged on as {0}!'.format(self.user))
+    async def on_message(self, message):
+        print('Message from {0.author}: {0.content}'.format(message))
+client = MyClient()
+"""
 
 @client.event
 async def on_message(message):
@@ -64,11 +66,13 @@ async def on_message(message):
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
 
+"""
 #jones speak
-#@client.event
-#async def on_message(message):
-#     if message.author.id == 244214874324860929 and ' ' in message.content.lower():
-#        await message.channel.send('Woof Woof 🐶')
+@client.event
+async def on_message(message):
+     if message.author.id == 244214874324860929 and ' ' in message.content.lower():
+        await message.channel.send('Woof Woof 🐶')
+"""
 
 #token
 token_file = open("token.txt")
