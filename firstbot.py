@@ -97,3 +97,7 @@ async def on_message(message):
 token_file = open("token.txt")
 token = token_file.read()
 client.run(token)
+
+"""
+hi :0
+"""
