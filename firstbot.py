@@ -9,6 +9,8 @@ client = discord.Client()
 sad_words = ['sad', 'depressed', 'depressing', 'depression', 'unhappy', 'miserable', 'angry', 'boring', 'kill', 'loath myself', 'loathe myself', 'perturbed', 'weep', 'hate',
  'toaster bath', 'agony', 'despair', 'fear', 'fearing', 'suffer', 'suffering']
 
+joneswords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
+
 starter_encouragement = [
     'Cheer up!',
     'Hang in there.',
@@ -66,6 +68,9 @@ async def on_message(message):
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
 
+    if message.author.id == '244214874324860929' and ' ' in message.content.lower():
+        await message.channel.send('Woof Woof 🐶')
+
     if '!addrole' in msg:
         userid = str(message.author.id)
         if userid == '357621946709442561':
@@ -85,13 +90,13 @@ async def on_message(message):
         else:
             await message.channel.send("Permission denied.")
 
-"""
+'''
 #jones speak
 @client.event
 async def on_message(message):
-     if message.author.id == 244214874324860929 and ' ' in message.content.lower():
+     if message.author.id == '244214874324860929' and ' ' in message.content.lower():
         await message.channel.send('Woof Woof 🐶')
-"""
+'''
 
 #token
 token_file = open("token.txt")
