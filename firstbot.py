@@ -69,7 +69,7 @@ async def on_message(message):
         await message.channel.send(random.choice(starter_encouragement))
 
     if any(word in msg for word in joneswords):
-        if message.author.id == 244214874324860929:
+        if message.author.id == 446780461084311572: #currently nedz not jones
             await message.channel.send('Woof Woof 🐶')
 
     if '!addrole' in msg:
