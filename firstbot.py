@@ -68,7 +68,7 @@ async def on_message(message):
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
 
-    if message.author.id == '244214874324860929' and ' ' in message.content.lower():
+    if message.author.id == '244214874324860929' and joneswords in message.content.lower():
         await message.channel.send('Woof Woof 🐶')
 
     if '!addrole' in msg:
