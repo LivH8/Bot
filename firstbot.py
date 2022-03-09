@@ -56,6 +56,7 @@ async def on_message(message):
             quote = get_quote()
             await message.channel.send(quote)
 
+    '''
     if 'bot' in msg:
         await message.channel.send("I am watching you!")
 
@@ -64,6 +65,7 @@ async def on_message(message):
 
     if 'dog' in msg:
         await message.channel.send("kitten***")
+    ''' 
 
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
