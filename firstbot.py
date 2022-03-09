@@ -67,10 +67,11 @@ async def on_message(message):
 
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
-
+    '''
     if any(word in msg for word in joneswords):
         if message.author.id == 446780461084311572: #currently nedz not jones
             await message.channel.send('Woof Woof 🐶')
+    '''
 
     if message.content.startswith('!commands'):
         commands = ['!hello', '!reply', '!inspire', '!role']
