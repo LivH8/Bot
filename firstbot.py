@@ -7,7 +7,7 @@ import random
 client = discord.Client()
 
 sad_words = ['sad', 'depressed', 'depressing', 'depression', 'unhappy', 'miserable', 'angry', 'boring', 'kill', 'loath myself', 'loathe myself', 'perturbed', 'weep', 'hate',
- 'toaster bath', 'agony', 'despair', 'fear', 'fearing', 'suffer', 'suffering']
+ 'toaster bath', 'agony', 'despair', 'fear', 'fearing', 'suffer', 'suffering', 'contempt']
 
 joneswords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
 
@@ -71,6 +71,13 @@ async def on_message(message):
     if any(word in msg for word in joneswords):
         if message.author.id == 446780461084311572: #currently nedz not jones
             await message.channel.send('Woof Woof 🐶')
+
+    if message.content.startswith('!commands'):
+        commands = ['!hello', '!reply', '!inspire', '!role']
+        com_message = ''
+        for i in range(len(commands)):
+            com_message = com_message + commands[i] + '\n'
+        await message.channel.send(com_message)
 
     if '!addrole' in msg:
         userid = str(message.author.id)
