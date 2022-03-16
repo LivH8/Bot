@@ -25,6 +25,8 @@ def get_quote():
     quote = json_data[0]['q'] + " -" + json_data[0]['a']
     return(quote)
 
+
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -108,7 +110,7 @@ async def on_message(message):
 
     if '!role' in msg:
         userid = str(message.author.id)
-        if userid == '357621946709442561':
+        if userid == '277360174371438592':
             reactionEmbed = discord.Embed(title="Role Selection", description="React with emojis to add roles", colour=0x87CEEB)
             reactionEmbed.add_field(name="To add Mapcore role:", value="🤡", inline=False)
             reactionEmbed.add_field(name="To add Test role:", value="🎇", inline=False)
@@ -117,11 +119,9 @@ async def on_message(message):
             await confirm.add_reaction('🤡')
             await confirm.add_reaction('🎇')
             await confirm.add_reaction('👺')
-            print(confirm.id)
 
-            f = open("confirmid.txt", "w")
-            f.write(str(confirm.id))
-            f.close()
+            global confirmID 
+            confirmID = confirm.id
         else:
             await message.channel.send("Permission denied.")
 
@@ -129,26 +129,32 @@ async def on_message(message):
 @client.event
 async def on_reaction_add(reaction, user):
     if user != client.user:
-        f = open("confirmid.txt", "r")
 
-        fileread = str(f.read())
         reactionread = str(reaction.message.id)
 
-        if (fileread == reactionread) and str(reaction.emoji) == "🤡":
+        if (str(confirmID) == reactionread) and str(reaction.emoji) == "🤡":
             role = discord.utils.get(user.guild.roles, name="Mapcore")
             await user.add_roles(role)
-            print(reaction)
-            print(user)
-        if (fileread == reactionread) and str(reaction.emoji) == "🎇":
+
+            print("Applied Mapcore role to " + str(user))
+
+            # TO DO REMOVE USER'S REACTION
+
+        if (str(confirmID) == reactionread) and str(reaction.emoji) == "🎇":
             role = discord.utils.get(user.guild.roles, name="Test")
             await user.add_roles(role)
-            print(reaction)
-            print(user)
-        if (fileread == reactionread) and str(reaction.emoji) == "👺":
+
+            print("Applied Test role to " + str(user))
+
+            # TO DO REMOVE USER'S REACTION
+
+        if (str(confirmID) == reactionread) and str(reaction.emoji) == "👺":
             role = discord.utils.get(user.guild.roles, name="Test2")
             await user.add_roles(role)
-            print(reaction)
-            print(user)
+
+            print("Applied Test2 role to " + str(user))
+
+            # TO DO REMOVE USER'S REACTION
 
 
 #token
