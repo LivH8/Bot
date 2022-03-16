@@ -65,14 +65,75 @@ async def on_message(message):
 
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
+<<<<<<< Updated upstream
+=======
+    '''
+    if any(word in msg for word in joneswords):
+        if message.author.id == 446780461084311572: #currently nedz not jones
+            await message.channel.send('Woof Woof 🐶')
+    '''
+
+    if message.content.startswith('!commands'):
+        commands = ['!hello', '!reply', '!inspire', '!role']
+        com_message = ''
+        for i in range(len(commands)):
+            com_message = com_message + commands[i] + '\n'
+        await message.channel.send(com_message)
+
+    if '!addrole' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561':
+            await message.channel.send("Confirm?")
+            user = message.author
+            role = discord.utils.get(user.guild.roles, name="Mapcore")
+            await user.add_roles(role)
+        else:
+            await message.channel.send("Permission denied.")
+
+    if '!role' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561' or "277360174371438592":
+            reactionEmbed = discord.Embed(title="Liv", description="Add roles", colour=0x87CEEB)
+            reactionEmbed.add_field(name="To add mapcore role react with:", value="🤡", inline=False)
+            reactionEmbed.add_field(name="Field 2", value="An inline field!", inline=True)
+            reactionEmbed.add_field(name="Field 3", value="Look I'm inline with field 2!", inline=True)
+
+            confirm = await message.channel.send(embed=reactionEmbed)
+
+            await confirm.add_reaction('🤡')
+
+            f = open("confirmid.txt", "w")
+            f.write(str(confirm.id))
+            f.close()
+
+
+        else:
+            await message.channel.send("Permission denied.")
+
+>>>>>>> Stashed changes
 
 """
 #jones speak
 @client.event
+<<<<<<< Updated upstream
 async def on_message(message):
      if message.author.id == 244214874324860929 and ' ' in message.content.lower():
         await message.channel.send('Woof Woof 🐶')
 """
+=======
+async def on_reaction_add(reaction, user):
+    if user != client.user:
+
+        f = open("confirmid.txt", "r")
+
+        fileread = str(f.read())
+        reactionread = str(reaction.message.id)
+
+        if (fileread == reactionread) and str(reaction.emoji) == "🤡":
+            role = discord.utils.get(user.guild.roles, name="Test")
+            await user.add_roles(role)
+
+>>>>>>> Stashed changes
 
 #token
 token_file = open("token.txt")
