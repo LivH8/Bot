@@ -92,15 +92,32 @@ async def on_message(message):
         else:
             await message.channel.send("Permission denied.")
 
+    if '!embed' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561':
+            reactionEmbed = discord.Embed(title="Role Selection", description="React with emojis to add roles", colour=0x87CEEB)
+            reactionEmbed.add_field(name="To add Mapcore role:", value="🤡", inline=False)
+            reactionEmbed.add_field(name="To add Test role:", value="🎇", inline=True)
+            reactionEmbed.add_field(name="To add Test2 role:", value="👺", inline=True)
+            confirm = await message.channel.send(embed=reactionEmbed)
+            await confirm.add_reaction('🤡')
+            await confirm.add_reaction('🎇')
+            await confirm.add_reaction('👺')
+        else:
+            await message.channel.send("Permission denied.")
+
     if '!role' in msg:
         userid = str(message.author.id)
         if userid == '357621946709442561':
-            reactionEmbed = discord.Embed(title="Liv", description="Add roles", colour=0x87CEEB)
-            reactionEmbed.add_field(name="To add mapcore role react with:", value="🤡", inline=False)
-            reactionEmbed.add_field(name="Field 2", value="An inline field!", inline=True)
-            reactionEmbed.add_field(name="Field 3", value="Look I'm inline with field 2!", inline=True)
+            reactionEmbed = discord.Embed(title="Role Selection", description="React with emojis to add roles", colour=0x87CEEB)
+            reactionEmbed.add_field(name="To add Mapcore role:", value="🤡", inline=False)
+            reactionEmbed.add_field(name="To add Test role:", value="🎇", inline=False)
+            reactionEmbed.add_field(name="To add Test2 role:", value="👺", inline=False)
             confirm = await message.channel.send(embed=reactionEmbed)
             await confirm.add_reaction('🤡')
+            await confirm.add_reaction('🎇')
+            await confirm.add_reaction('👺')
+            print(confirm.id)
         else:
             await message.channel.send("Permission denied.")
 
@@ -110,6 +127,16 @@ async def on_reaction_add(reaction, user):
     if user != client.user:
         if str(reaction.emoji) == "🤡":
             role = discord.utils.get(user.guild.roles, name="Mapcore")
+            await user.add_roles(role)
+            print(reaction)
+            print(user)
+        if str(reaction.emoji) == "🎇":
+            role = discord.utils.get(user.guild.roles, name="Test")
+            await user.add_roles(role)
+            print(reaction)
+            print(user)
+        if str(reaction.emoji) == "👺":
+            role = discord.utils.get(user.guild.roles, name="Test2")
             await user.add_roles(role)
             print(reaction)
             print(user)
