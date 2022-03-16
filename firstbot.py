@@ -7,7 +7,9 @@ import random
 client = discord.Client()
 
 sad_words = ['sad', 'depressed', 'depressing', 'depression', 'unhappy', 'miserable', 'angry', 'boring', 'kill', 'loath myself', 'loathe myself', 'perturbed', 'weep', 'hate',
- 'toaster bath', 'agony', 'despair', 'fear', 'fearing', 'suffer', 'suffering']
+ 'toaster bath', 'agony', 'despair', 'fear', 'fearing', 'suffer', 'suffering', 'contempt']
+
+joneswords = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
 
 starter_encouragement = [
     'Cheer up!',
@@ -54,6 +56,7 @@ async def on_message(message):
             quote = get_quote()
             await message.channel.send(quote)
 
+    '''
     if 'bot' in msg:
         await message.channel.send("I am watching you!")
 
@@ -62,19 +65,97 @@ async def on_message(message):
 
     if 'dog' in msg:
         await message.channel.send("kitten***")
+    ''' 
 
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
+    '''
+    if any(word in msg for word in joneswords):
+        if message.author.id == 446780461084311572: #currently nedz not jones
+            await message.channel.send('Woof Woof 🐶')
+    '''
 
-"""
-#jones speak
+    if message.content.startswith('!commands'):
+        commands = ['!hello', '!reply', '!inspire', '!role']
+        com_message = ''
+        for i in range(len(commands)):
+            com_message = com_message + commands[i] + '\n'
+        await message.channel.send(com_message)
+
+    if '!addrole' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561':
+            await message.channel.send("Confirm?")
+            user = message.author
+            role = discord.utils.get(user.guild.roles, name="Mapcore")
+            await user.add_roles(role)
+        else:
+            await message.channel.send("Permission denied.")
+
+    if '!embed' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561':
+            reactionEmbed = discord.Embed(title="Role Selection", description="React with emojis to add roles", colour=0x87CEEB)
+            reactionEmbed.add_field(name="To add Mapcore role:", value="🤡", inline=False)
+            reactionEmbed.add_field(name="To add Test role:", value="🎇", inline=True)
+            reactionEmbed.add_field(name="To add Test2 role:", value="👺", inline=True)
+            confirm = await message.channel.send(embed=reactionEmbed)
+            await confirm.add_reaction('🤡')
+            await confirm.add_reaction('🎇')
+            await confirm.add_reaction('👺')
+        else:
+            await message.channel.send("Permission denied.")
+
+    if '!role' in msg:
+        userid = str(message.author.id)
+        if userid == '357621946709442561':
+            reactionEmbed = discord.Embed(title="Role Selection", description="React with emojis to add roles", colour=0x87CEEB)
+            reactionEmbed.add_field(name="To add Mapcore role:", value="🤡", inline=False)
+            reactionEmbed.add_field(name="To add Test role:", value="🎇", inline=False)
+            reactionEmbed.add_field(name="To add Test2 role:", value="👺", inline=False)
+            confirm = await message.channel.send(embed=reactionEmbed)
+            await confirm.add_reaction('🤡')
+            await confirm.add_reaction('🎇')
+            await confirm.add_reaction('👺')
+            print(confirm.id)
+
+            f = open("confirmid.txt", "w")
+            f.write(str(confirm.id))
+            f.close()
+        else:
+            await message.channel.send("Permission denied.")
+
+
 @client.event
-async def on_message(message):
-     if message.author.id == 244214874324860929 and ' ' in message.content.lower():
-        await message.channel.send('Woof Woof 🐶')
-"""
+async def on_reaction_add(reaction, user):
+    if user != client.user:
+        f = open("confirmid.txt", "r")
+
+        fileread = str(f.read())
+        reactionread = str(reaction.message.id)
+
+        if (fileread == reactionread) and str(reaction.emoji) == "🤡":
+            role = discord.utils.get(user.guild.roles, name="Mapcore")
+            await user.add_roles(role)
+            print(reaction)
+            print(user)
+        if (fileread == reactionread) and str(reaction.emoji) == "🎇":
+            role = discord.utils.get(user.guild.roles, name="Test")
+            await user.add_roles(role)
+            print(reaction)
+            print(user)
+        if (fileread == reactionread) and str(reaction.emoji) == "👺":
+            role = discord.utils.get(user.guild.roles, name="Test2")
+            await user.add_roles(role)
+            print(reaction)
+            print(user)
+
 
 #token
 token_file = open("token.txt")
 token = token_file.read()
 client.run(token)
+
+"""
+hi :0
+"""
