@@ -110,7 +110,7 @@ async def on_message(message):
 
     if '!role' in msg:
         userid = str(message.author.id)
-        if userid == '277360174371438592':
+        if userid == '357621946709442561':
             reactionEmbed = discord.Embed(title="Role Selection", description="React with emojis to add roles", colour=0x87CEEB)
             reactionEmbed.add_field(name="To add Mapcore role:", value="🤡", inline=False)
             reactionEmbed.add_field(name="To add Test role:", value="🎇", inline=False)
@@ -122,6 +122,8 @@ async def on_message(message):
 
             global confirmID 
             confirmID = confirm.id
+
+            # TO DO REMOVE COMMAND MESSAGE
         else:
             await message.channel.send("Permission denied.")
 
