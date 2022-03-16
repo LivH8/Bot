@@ -65,8 +65,6 @@ async def on_message(message):
 
     if any(word in msg for word in sad_words):
         await message.channel.send(random.choice(starter_encouragement))
-<<<<<<< Updated upstream
-=======
     '''
     if any(word in msg for word in joneswords):
         if message.author.id == 446780461084311572: #currently nedz not jones
@@ -110,17 +108,8 @@ async def on_message(message):
         else:
             await message.channel.send("Permission denied.")
 
->>>>>>> Stashed changes
 
-"""
-#jones speak
 @client.event
-<<<<<<< Updated upstream
-async def on_message(message):
-     if message.author.id == 244214874324860929 and ' ' in message.content.lower():
-        await message.channel.send('Woof Woof 🐶')
-"""
-=======
 async def on_reaction_add(reaction, user):
     if user != client.user:
 
@@ -133,7 +122,6 @@ async def on_reaction_add(reaction, user):
             role = discord.utils.get(user.guild.roles, name="Test")
             await user.add_roles(role)
 
->>>>>>> Stashed changes
 
 #token
 token_file = open("token.txt")
