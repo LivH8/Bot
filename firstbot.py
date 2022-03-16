@@ -95,19 +95,25 @@ async def on_message(message):
     if '!role' in msg:
         userid = str(message.author.id)
         if userid == '357621946709442561':
-            confirm = await message.channel.send("Confirm?")
-            print(confirm)
-            await confirm.add_reaction('👍')
+            reactionEmbed = discord.Embed(title="Liv", description="Add roles", colour=0x87CEEB)
+            reactionEmbed.add_field(name="To add mapcore role react with:", value="🤡", inline=False)
+            reactionEmbed.add_field(name="Field 2", value="An inline field!", inline=True)
+            reactionEmbed.add_field(name="Field 3", value="Look I'm inline with field 2!", inline=True)
+            confirm = await message.channel.send(embed=reactionEmbed)
+            await confirm.add_reaction('🤡')
         else:
             await message.channel.send("Permission denied.")
 
-'''
-#jones speak
+
 @client.event
-async def on_message(message):
-     if message.author.id == '244214874324860929' and ' ' in message.content.lower():
-        await message.channel.send('Woof Woof 🐶')
-'''
+async def on_reaction_add(reaction, user):
+    if user != client.user:
+        if str(reaction.emoji) == "🤡":
+            role = discord.utils.get(user.guild.roles, name="Mapcore")
+            await user.add_roles(role)
+            print(reaction)
+            print(user)
+
 
 #token
 token_file = open("token.txt")
