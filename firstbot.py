@@ -118,6 +118,10 @@ async def on_message(message):
             await confirm.add_reaction('🎇')
             await confirm.add_reaction('👺')
             print(confirm.id)
+
+            f = open("confirmid.txt", "w")
+            f.write(str(confirm.id))
+            f.close()
         else:
             await message.channel.send("Permission denied.")
 
@@ -125,17 +129,22 @@ async def on_message(message):
 @client.event
 async def on_reaction_add(reaction, user):
     if user != client.user:
-        if str(reaction.emoji) == "🤡":
+        f = open("confirmid.txt", "r")
+
+        fileread = str(f.read())
+        reactionread = str(reaction.message.id)
+
+        if (fileread == reactionread) and str(reaction.emoji) == "🤡":
             role = discord.utils.get(user.guild.roles, name="Mapcore")
             await user.add_roles(role)
             print(reaction)
             print(user)
-        if str(reaction.emoji) == "🎇":
+        if (fileread == reactionread) and str(reaction.emoji) == "🎇":
             role = discord.utils.get(user.guild.roles, name="Test")
             await user.add_roles(role)
             print(reaction)
             print(user)
-        if str(reaction.emoji) == "👺":
+        if (fileread == reactionread) and str(reaction.emoji) == "👺":
             role = discord.utils.get(user.guild.roles, name="Test2")
             await user.add_roles(role)
             print(reaction)
